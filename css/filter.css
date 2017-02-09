@@ -1,7 +1,3 @@
-.filter-image-preview {
-  transform: scale(0.55);
-}
-
 .upload-filter-label-phobos .upload-filter-preview,
 .filter-phobos {
   -webkit-filter: hue-rotate(90deg);
