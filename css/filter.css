@@ -9,3 +9,8 @@
   -webkit-filter: saturate(4);
           filter: saturate(4);
 }
+
+.upload-filter-label:focus,
+.upload-file:focus {
+  border: 2px solid lime;
+}
