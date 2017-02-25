@@ -1,9 +1,11 @@
 'use strict';
 
-window.utils = {
-  ENTER_KEY_CODE: 13,
-  ESCAPE_KEY_CODE: 27,
-  isActivate: function (evt) {
-    return evt.keyCode && evt.keyCode === this.ENTER_KEY_CODE;
-  }
-};
+window.utils = (function () {
+  var ENTER_KEY_CODE = 13;
+  var isActivate = function (evt) {
+    return evt.keyCode && evt.keyCode === ENTER_KEY_CODE;
+  };
+  return {
+    isActivate: isActivate
+  };
+})();

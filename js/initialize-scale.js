@@ -1,66 +1,71 @@
 'use strict';
 
-window.initializeScale = {
-  scale: 100,
-  scaleMin: 25,
-  scaleMax: 100,
-  scaleStep: 25,
-  isMinScale: function () {
-    if (this.scale < this.scaleMin) {
-      this.scale = this.scaleMin;
+window.initializeScale = (function () {
+  var scale = 100;
+  var scaleMin = 25;
+  var scaleMax = 100;
+  var scaleStep = 25;
+  var isMinScale = function () {
+    if (scale < scaleMin) {
+      scale = scaleMin;
     }
-  },
-  isMaxScale: function () {
-    if (this.scale > this.scaleMax) {
-      this.scale = this.scaleMax;
+  };
+  var isMaxScale = function () {
+    if (scale > scaleMax) {
+      scale = scaleMax;
     }
-  },
-  calcScale: function (action) {
+  };
+  var calcScale = function (action) {
     if (action) {
-      this.scale += this.scaleStep;
-      this.isMaxScale();
+      scale += scaleStep;
+      isMaxScale();
     } else {
-      this.scale -= this.scaleStep;
-      this.isMinScale();
+      scale -= scaleStep;
+      isMinScale();
     }
-    return this.scale;
-  },
-  setupScale: function (image, scale) {
-    image.style.transform = 'scale(' + (scale / 100).toFixed(2) + ')';
-  },
-  setResizeControlsValue: function (resizeControlValue, currentScale) {
+    return scale;
+  };
+  var setupScale = function (image, currentScale) {
+    image.style.transform = 'scale(' + (currentScale / 100).toFixed(2) + ')';
+  };
+  var setResizeControlsValue = function (resizeControlValue, currentScale) {
     resizeControlValue.value = currentScale + '%';
-  },
-  decScale: function (image, resizeControlValue) {
-    var currentScale = this.calcScale(false);
-    this.setupScale(image, currentScale);
-    this.setResizeControlsValue(resizeControlValue, currentScale);
-  },
-  incScale: function (image, resizeControlValue) {
-    var currentScale = this.calcScale(true);
-    this.setupScale(image, currentScale);
-    this.setResizeControlsValue(resizeControlValue, currentScale);
-  },
-  resizeDecScaleImage: function (elem, image, resizeControlValue) {
-    var self = this;
+  };
+  var decScale = function (image, resizeControlValue) {
+    var currentScale = calcScale(false);
+    setupScale(image, currentScale);
+    setResizeControlsValue(resizeControlValue, currentScale);
+  };
+  var incScale = function (image, resizeControlValue) {
+    var currentScale = calcScale(true);
+    setupScale(image, currentScale);
+    setResizeControlsValue(resizeControlValue, currentScale);
+  };
+  var resizeDecScaleImage = function (elem, image, resizeControlValue) {
     elem.addEventListener('click', function () {
-      self.decScale(image, resizeControlValue);
+      decScale(image, resizeControlValue);
     });
     elem.addEventListener('keydown', function (evt) {
       if (window.utils.isActivate(evt)) {
-        self.decScale(image, resizeControlValue);
+        decScale(image, resizeControlValue);
       }
     });
-  },
-  resizeIncScaleImage: function (elem, image, resizeControlValue) {
-    var self = this;
+  };
+  var resizeIncScaleImage = function (elem, image, resizeControlValue) {
     elem.addEventListener('click', function () {
-      self.incScale(image, resizeControlValue);
+      incScale(image, resizeControlValue);
     });
     elem.addEventListener('keydown', function (evt) {
       if (window.utils.isActivate(evt)) {
-        self.incScale(image, resizeControlValue);
+        incScale(image, resizeControlValue);
       }
     });
-  }
-};
+  };
+  return {
+    scale: scale,
+    setupScale: setupScale,
+    setResizeControlsValue: setResizeControlsValue,
+    resizeDecScaleImage: resizeDecScaleImage,
+    resizeIncScaleImage: resizeIncScaleImage
+  };
+})();
