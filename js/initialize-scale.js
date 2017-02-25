@@ -1,26 +1,26 @@
 'use strict';
 
 window.initializeScale = {
-  scale: null,
-  resizeMin: 25,
-  resizeMax: 100,
-  resizeStep: 25,
+  scale: 100,
+  scaleMin: 25,
+  scaleMax: 100,
+  scaleStep: 25,
   isMinScale: function () {
-    if (this.scale < this.resizeMin) {
-      this.scale = this.resizeMin;
+    if (this.scale < this.scaleMin) {
+      this.scale = this.scaleMin;
     }
   },
   isMaxScale: function () {
-    if (this.scale > this.resizeMax) {
-      this.scale = this.resizeMax;
+    if (this.scale > this.scaleMax) {
+      this.scale = this.scaleMax;
     }
   },
   calcScale: function (action) {
     if (action) {
-      this.scale += this.resizeStep;
+      this.scale += this.scaleStep;
       this.isMaxScale();
     } else {
-      this.scale -= this.resizeStep;
+      this.scale -= this.scaleStep;
       this.isMinScale();
     }
     return this.scale;
