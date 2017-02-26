@@ -17,6 +17,7 @@ window.pictures = (function () {
       newElement = elementToClone.cloneNode(true);
       newElement.src = picture.url;
       newElement.querySelector('img').src = picture.url;
+      newElement.querySelector('img').classList.add('pickture_' + i);
       newElement.querySelector('img').setAttribute('tabindex', '0');
       newElement.querySelector('.picture-comments').innerText = picture.comments.length;
       newElement.querySelector('.picture-likes').innerText = picture.likes;
@@ -25,8 +26,9 @@ window.pictures = (function () {
     }
   });
   var getCurrentPictur = function (evt) {
-    var currentPicture = document.querySelector('.' + evt.currentTarget.htmlFor).value;
-    var urlImg = currentPicture.querySelector('.img').src.value;
+    console.log(evt);
+    var currentPicture = document.querySelector('.' + evt.currentTarget.htmlFor);
+    var urlImg = currentPicture.src.value;
     var commentsImg = currentPicture.querySelector('.picture-comments').value;
     var likeImg = currentPicture.querySelector('.picture-likes').value;
     window.showGallery.getImage(urlImg, commentsImg, likeImg);
@@ -47,21 +49,3 @@ window.pictures = (function () {
   };
   getPictures();
 })();
-
-// (function () {
-//   var DATA_URL = 'https://intensive-javascript-server-myophkugvq.now.sh/kekstagram/data';
-//   var templates = document.querySelector('#picture-template');
-//   var pictures = [];
-//   var loadData = function (evt) {
-//     pictures = JSON.parse(evt.target.responseText);
-//   };
-//   window.load(DATA_URL, loadData);
-//
-//   for (var i = 0; i < pictures.length; i++) {
-//
-//   }
-//
-//   return {
-//     pictures: pictures
-//   };
-// })();
