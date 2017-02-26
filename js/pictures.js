@@ -117,18 +117,30 @@ function getRandomArrayElements(arr, count) {
   }
   return shuffled.slice(min);
 }
+//
+// function cloneObject(obj) {
+//   if (obj === null || typeof obj !== 'object') {
+//     return void obj;
+//   }
+//
+//   var temp = obj.constructor(); // give temp the original obj's constructor
+//   for (var key in obj) {
+//     temp[key] = cloneObject(obj[key]);
+//     return temp;
+//   }
+// }
 
-
-function cloneObject (obj) {
+function cloneObject(obj) {
   if (obj === null || typeof obj !== 'object') {
     return obj;
   }
 
-  var temp = obj.constructor(); // give temp the original obj's constructor
+  var temp = obj.constructor(); // give temp the original obj"s constructor
   for (var key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+    if ({}.hasOwnProperty.call(obj, key)) {
       temp[key] = cloneObject(obj[key]);
     }
-    return temp;
   }
+
+  return temp;
 }
