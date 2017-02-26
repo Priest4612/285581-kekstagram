@@ -101,8 +101,6 @@ document.querySelector('label[for="filter-discussed"]').addEventListener('click'
   showPictures('filter-discussed');
 });
 
-
-// subfunctions
 function getRandomArrayElements(arr, count) {
   var shuffled = arr.slice(0);
   var i = arr.length;
@@ -117,18 +115,6 @@ function getRandomArrayElements(arr, count) {
   }
   return shuffled.slice(min);
 }
-//
-// function cloneObject(obj) {
-//   if (obj === null || typeof obj !== 'object') {
-//     return void obj;
-//   }
-//
-//   var temp = obj.constructor(); // give temp the original obj's constructor
-//   for (var key in obj) {
-//     temp[key] = cloneObject(obj[key]);
-//     return temp;
-//   }
-// }
 
 function cloneObject(obj) {
   if (obj === null || typeof obj !== 'object') {
