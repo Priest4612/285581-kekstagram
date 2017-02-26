@@ -29,18 +29,18 @@ window.pictures = (function () {
     var urlImg = currentPicture.querySelector('.img').src.value;
     var commentsImg = currentPicture.querySelector('.picture-comments').value;
     var likeImg = currentPicture.querySelector('.picture-likes').value;
-    window.showGallery(urlImg, commentsImg, likeImg);
+    window.showGallery.getImage(urlImg, commentsImg, likeImg);
   };
 
   var getPictures = function () {
     var pictures = document.querySelectorAll('.pictures');
     for (var i = 0; i < pictures.length; i++) {
       pictures[i].addEventListener('click', function (evt) {
-        getCurrentPictur();
+        getCurrentPictur(evt);
       });
       pictures[i].addEventListener('keydown', function (evt) {
         if (window.utils.isActivate(evt)) {
-          getCurrentPictur();
+          getCurrentPictur(evt);
         }
       });
     }
