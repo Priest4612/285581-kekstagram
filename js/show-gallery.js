@@ -1,20 +1,26 @@
 'use strict';
 
-window.showGallery = function () {
-  var galleryOverlay = document.querySelector('.gallery-overlay');
+window.ShowGallery = function () {
+  var galleryOpenOverlay = document.querySelector('.gallery-overlay');
+  var galleryCloseOverlay = document.querySelector('.gallery-overlay-close');
   var image = document.querySelector('.gallery-overlay-image');
   var commentsCount = document.querySelector('.comments-count');
   var likesCount = document.querySelector('.likes-count');
 
 
-  var getImage = function (url, comments, likes) {
-    galleryOverlay.classList.remove('invisible');
+  this.getImage = function (url, comments, likes) {
+    galleryOpenOverlay.classList.remove('invisible');
     image.src = url;
     commentsCount.innerText = comments;
     likesCount.innerText = likes;
   };
 
-  return {
-    getImage: getImage
-  };
+  galleryCloseOverlay.addEventListener('click', function () {
+    galleryOpenOverlay.classList.add('invisible');
+  });
+  galleryCloseOverlay.addEventListener('click', function (evt) {
+    if (window.utils.isActivate(evt)) {
+      galleryOpenOverlay.classList.add('invisible');
+    }
+  });
 };

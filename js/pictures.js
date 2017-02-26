@@ -26,22 +26,27 @@ window.pictures = (function () {
     }
   });
   var getCurrentPictur = function (evt) {
-    console.log(evt);
-    var currentPicture = document.querySelector('.' + evt.currentTarget.htmlFor);
-    var urlImg = currentPicture.src.value;
-    var commentsImg = currentPicture.querySelector('.picture-comments').value;
-    var likeImg = currentPicture.querySelector('.picture-likes').value;
-    window.showGallery.getImage(urlImg, commentsImg, likeImg);
+    var currentPicture = evt.target;
+    var urlImg = currentPicture.src;
+
+    var commentsImg = currentPicture.parentElement.querySelector('.picture-comments').innerText;
+    var likeImg = currentPicture.parentElement.querySelector('.picture-likes').innerText;
+
+    new window.ShowGallery().getImage(urlImg, commentsImg, likeImg);
   };
 
   var getPictures = function () {
     var pictures = document.querySelectorAll('.pictures');
     for (var i = 0; i < pictures.length; i++) {
       pictures[i].addEventListener('click', function (evt) {
-        getCurrentPictur(evt);
+        evt.preventDefault();
+        if (evt.target.tagName === 'IMG') {
+          getCurrentPictur(evt);
+        }
       });
       pictures[i].addEventListener('keydown', function (evt) {
         if (window.utils.isActivate(evt)) {
+          evt.preventDefault();
           getCurrentPictur(evt);
         }
       });
