@@ -25,45 +25,41 @@ window.initializeScale = (function () {
     }
     return scale;
   };
-  var setupScale = function (image, currentScale) {
-    image.style.transform = 'scale(' + (currentScale / 100).toFixed(2) + ')';
-  };
   var setResizeControlsValue = function (resizeControlValue, currentScale) {
     resizeControlValue.value = currentScale + '%';
   };
-  var decScale = function (image, resizeControlValue) {
+  var decScale = function (image, resizeControlValue, setupScale) {
     var currentScale = calcScale(false);
     setupScale(image, currentScale);
     setResizeControlsValue(resizeControlValue, currentScale);
   };
-  var incScale = function (image, resizeControlValue) {
+  var incScale = function (image, resizeControlValue, setupScale) {
     var currentScale = calcScale(true);
     setupScale(image, currentScale);
     setResizeControlsValue(resizeControlValue, currentScale);
   };
-  var resizeDecScaleImage = function (elem, image, resizeControlValue) {
+  var resizeDecScaleImage = function (elem, image, resizeControlValue, setupScale) {
     elem.addEventListener('click', function () {
-      decScale(image, resizeControlValue);
+      decScale(image, resizeControlValue, setupScale);
     });
     elem.addEventListener('keydown', function (evt) {
       if (window.utils.isActivate(evt)) {
-        decScale(image, resizeControlValue);
+        decScale(image, resizeControlValue, setupScale);
       }
     });
   };
-  var resizeIncScaleImage = function (elem, image, resizeControlValue) {
+  var resizeIncScaleImage = function (elem, image, resizeControlValue, setupScale) {
     elem.addEventListener('click', function () {
-      incScale(image, resizeControlValue);
+      incScale(image, resizeControlValue, setupScale);
     });
     elem.addEventListener('keydown', function (evt) {
       if (window.utils.isActivate(evt)) {
-        incScale(image, resizeControlValue);
+        incScale(image, resizeControlValue, setupScale);
       }
     });
   };
   return {
     scale: scale,
-    setupScale: setupScale,
     setResizeControlsValue: setResizeControlsValue,
     resizeDecScaleImage: resizeDecScaleImage,
     resizeIncScaleImage: resizeIncScaleImage
