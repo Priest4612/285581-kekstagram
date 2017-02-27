@@ -1,6 +1,6 @@
 'use strict';
 
-window.ShowGallery = function () {
+window.showGallery = (function () {
   var galleryOpenOverlay = document.querySelector('.gallery-overlay');
   var galleryCloseOverlay = document.querySelector('.gallery-overlay-close');
   var image = document.querySelector('.gallery-overlay-image');
@@ -8,7 +8,7 @@ window.ShowGallery = function () {
   var likesCount = document.querySelector('.likes-count');
 
 
-  this.getImage = function (url, comments, likes) {
+  var getImage = function (url, comments, likes) {
     galleryOpenOverlay.classList.remove('invisible');
     image.src = url;
     commentsCount.innerText = comments;
@@ -23,4 +23,7 @@ window.ShowGallery = function () {
       galleryOpenOverlay.classList.add('invisible');
     }
   });
-};
+  return {
+    getImage: getImage
+  };
+})();
