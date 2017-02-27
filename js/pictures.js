@@ -58,8 +58,9 @@ function showPictures(type) {
     picturesPlace.appendChild(newElement);
   }
 
-  filters.classList.remove('invisible');
+
 }
+filters.classList.remove('hidden');
 
 window.load(DATA_URL, function (evt) {
   pictures = JSON.parse(evt.target.responseText);
