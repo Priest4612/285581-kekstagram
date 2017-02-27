@@ -4,22 +4,26 @@ var DATA_URL = 'https://intensive-javascript-server-myophkugvq.now.sh/kekstagram
 var filters = document.querySelector('.filters');
 var pictures = null;
 
+var onMouseKey = function (evt) {
+  evt.preventDefault();
+  if (evt.target.tagName === 'IMG') {
+    getCurrentPictur(evt);
+  }
+};
+
+var onKeydown = function (evt) {
+  if (window.utils.isActivate(evt)) {
+    evt.preventDefault();
+    getCurrentPictur(evt);
+  }
+};
+
 function showPictures(type) {
   var elem = document.querySelectorAll('.picture');
   for (var j = elem.length - 1; j >= 0; j--) {
     if (elem[j].parentNode) {
-      elem[j].removeEventListener('keydown', function (evt) {
-        if (window.utils.isActivate(evt)) {
-          evt.preventDefault();
-          getCurrentPictur(evt);
-        }
-      });
-      elem[j].removeEventListener('click', function (evt) {
-        evt.preventDefault();
-        if (evt.target.tagName === 'IMG') {
-          getCurrentPictur(evt);
-        }
-      });
+      elem[j].removeEventListener('keydown', onKeydown);
+      elem[j].removeEventListener('click', onMouseKey);
       elem[j].parentNode.removeChild(elem[j]);
     }
   }
@@ -86,18 +90,8 @@ var getCurrentPictur = function (evt) {
 var setEventsForPictures = function () {
   pictures = document.querySelectorAll('.pictures');
   for (var i = 0; i < pictures.length; i++) {
-    pictures[i].addEventListener('click', function (evt) {
-      evt.preventDefault();
-      if (evt.target.tagName === 'IMG') {
-        getCurrentPictur(evt);
-      }
-    });
-    pictures[i].addEventListener('keydown', function (evt) {
-      if (window.utils.isActivate(evt)) {
-        evt.preventDefault();
-        getCurrentPictur(evt);
-      }
-    });
+    pictures[i].addEventListener('click', onMouseKey);
+    pictures[i].addEventListener('keydown', onKeydown);
   }
 };
 setEventsForPictures();
