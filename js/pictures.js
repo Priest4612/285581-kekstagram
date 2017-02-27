@@ -2,13 +2,18 @@
 
 var DATA_URL = 'https://intensive-javascript-server-myophkugvq.now.sh/kekstagram/data';
 var filters = document.querySelector('.filters');
-filters.classList.remove('hidden');
 var pictures = null;
 
 function showPictures(type) {
   var elem = document.querySelectorAll('.picture');
   for (var j = elem.length - 1; j >= 0; j--) {
     if (elem[j].parentNode) {
+      elem[j].removeEventListener('keydown', function (evt) {
+        if (window.utils.isActivate(evt)) {
+          evt.preventDefault();
+          getCurrentPictur(evt);
+        }
+      });
       elem[j].parentNode.removeChild(elem[j]);
     }
   }
@@ -53,7 +58,7 @@ function showPictures(type) {
     picturesPlace.appendChild(newElement);
   }
 
-  document.querySelector('.filters').classList.remove('invisible');
+  filters.classList.remove('invisible');
 }
 
 window.load(DATA_URL, function (evt) {
