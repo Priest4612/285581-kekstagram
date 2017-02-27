@@ -14,6 +14,12 @@ function showPictures(type) {
           getCurrentPictur(evt);
         }
       });
+      elem[j].removeEventListener('click', function (evt) {
+        evt.preventDefault();
+        if (evt.target.tagName === 'IMG') {
+          getCurrentPictur(evt);
+        }
+      });
       elem[j].parentNode.removeChild(elem[j]);
     }
   }
